@@ -16,7 +16,7 @@
         <div class="tab-bar">
             <button class="tab-btn active" onclick="switchTab('itinerary', event)">📅 7日行程</button>
             <button class="tab-btn" onclick="switchTab('checklist', event)">✅ 準備清單</button>
-            <button class="tab-btn" onclick="switchTab('tools', event)">🧰 實用工具</button>
+            <button class="tab-btn" onclick="switchTab('tools', event)">🧰 隨身速查</button>
             <button class="tab-btn" onclick="switchTab('japanese', event)">🗣️ 實用日語</button>
         </div>
     </div>
@@ -279,73 +279,10 @@
             </div>
         </div>
 
-        <!-- ===== 頁籤 3：實用工具 ===== -->
-        <div id="tools" class="tab-content">
-            <div class="card">
-                <h2 class="list-title">💴 匯率換算 (日幣 JPY ➔ 台幣 TWD)</h2>
-                <div class="tool-row">
-                    <div class="tool-field">
-                        <label>日幣 (JPY)</label>
-                        <input type="number" id="jpyInput" value="1000" oninput="convertCurrency()">
-                    </div>
-                    <div class="tool-field">
-                        <label>約合台幣 (TWD)</label>
-                        <input type="text" id="twdResult" readonly>
-                    </div>
-                </div>
-                <div style="font-size:0.8rem; color:var(--text-sub);">預設匯率 1 JPY = 0.21 TWD</div>
-            </div>
-        </div>
-
-       <!-- ===== 頁籤 4：實用日語 (親子關西自由行版) ===== -->
-        <div id="japanese" class="tab-content">
-            
-            <!-- 情境 1：親子用餐與點餐 -->
-            <div class="card">
-                <h2 class="list-title">🍽️ 親子用餐與點餐</h2>
-                <div class="phrase-item">
-                    <div class="phrase-jp">子供用の椅子はありますか？</div>
-                    <div class="phrase-zh">請問有兒童座椅嗎？ (Kodomo yo no ishi wa arimasu ka?)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">子供用のお皿とフォークをお願いします。</div>
-                    <div class="phrase-zh">請給我兒童餐具（碗與叉子）。 (Kodomo yo no osara to foku o onegaishimasu)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">これは辛いですか？（わさび抜きで）</div>
-                    <div class="phrase-zh">請問這個會辣嗎？（請不要加哇沙米） (Kore wa karai desu ka? Wasabi nuki de)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">お会計をお願いします。</div>
-                    <div class="phrase-zh">請幫我結帳。 (Okaikei o onegaishimasu)</div>
-                </div>
-            </div>
-
-            <!-- 情境 2：景點、環球影城與設施詢問 -->
-            <div class="card">
-                <h2 class="list-title">🎡 景點、USJ 與設施詢問</h2>
-                <div class="phrase-item">
-                    <div class="phrase-jp">ベビーカーの貸し出しはありますか？</div>
-                    <div class="phrase-zh">請問有提供嬰兒推車租借嗎？ (Bebika no kashidashi wa arimasu ka?)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">授乳室（オムツ交換台）はどこですか？</div>
-                    <div class="phrase-zh">請問哺乳室（換尿布台）在哪裡？ (Junyushitsu / Omutsu kokandai wa doko desu ka?)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">チャイルドスイッチを利用したいです。</div>
-                    <div class="phrase-zh">我想使用環球影城的「輪流乘坐 (Child Switch)」服務。 (Chairudo suitchi o riyo shitaidesu)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">写真を撮っていただけますか？</div>
-                    <div class="phrase-zh">可以幫我們拍張照嗎？ (Shashin o to tte itadakemasu ka?)</div>
-                </div>
-            </div>
-
-           <!-- ===== 頁籤 3：隨身速查工具箱 ===== -->
+        <!-- ===== 頁籤 3：隨身速查工具箱 ===== -->
         <div id="tools" class="tab-content">
             
-            <!-- 1. 重要行程資訊卡 (隨時查閱) -->
+            <!-- 1. 重要行程資訊卡 -->
             <div class="card">
                 <h2 class="list-title">🏨 住宿與交通重要資訊</h2>
                 <div class="section">
@@ -389,7 +326,7 @@
                 <div style="font-size:0.8rem; color:var(--text-sub); margin-top:6px;">* 預設參考匯率 0.21，滿 5,000 日圓可享免稅 10%</div>
             </div>
 
-            <!-- 3. 日本童裝與鞋號尺寸對照表 -->
+            <!-- 3. 童裝與鞋號對照 -->
             <div class="card">
                 <h2 class="list-title">👟 童裝/童鞋尺寸速查 (5歲 & 2歲)</h2>
                 <div class="section-content">
@@ -401,7 +338,7 @@
                 </div>
             </div>
 
-            <!-- 4. 緊急連絡電話（一鍵撥打） -->
+            <!-- 4. 緊急電話 -->
             <div class="card">
                 <h2 class="list-title">🚨 緊急聯絡與求助電話</h2>
                 <div class="section" style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -414,7 +351,52 @@
 
         </div>
 
-            <!-- 情境 4：緊急狀況與求助 -->
+        <!-- ===== 頁籤 4：實用日語 ===== -->
+        <div id="japanese" class="tab-content">
+            
+            <!-- 情境 1：點餐 -->
+            <div class="card">
+                <h2 class="list-title">🍽️ 親子用餐與點餐</h2>
+                <div class="phrase-item">
+                    <div class="phrase-jp">子供用の椅子はありますか？</div>
+                    <div class="phrase-zh">請問有兒童座椅嗎？ (Kodomo yo no ishi wa arimasu ka?)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">子供用のお皿とフォークをお願いします。</div>
+                    <div class="phrase-zh">請給我兒童餐具（碗與叉子）。 (Kodomo yo no osara to foku o onegaishimasu)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">これは辛いですか？（わさび抜きで）</div>
+                    <div class="phrase-zh">請問這個會辣嗎？（請不要加哇沙米） (Kore wa karai desu ka? Wasabi nuki de)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">お会計をお願いします。</div>
+                    <div class="phrase-zh">請幫我結帳。 (Okaikei o onegaishimasu)</div>
+                </div>
+            </div>
+
+            <!-- 情境 2：設施 -->
+            <div class="card">
+                <h2 class="list-title">🎡 景點、USJ 與設施詢問</h2>
+                <div class="phrase-item">
+                    <div class="phrase-jp">ベビーカーの貸し出しはありますか？</div>
+                    <div class="phrase-zh">請問有提供嬰兒推車租借嗎？ (Bebika no kashidashi wa arimasu ka?)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">授乳室（オムツ交換台）はどこですか？</div>
+                    <div class="phrase-zh">請問哺乳室（換尿布台）在哪裡？ (Junyushitsu / Omutsu kokandai wa doko desu ka?)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">チャイルドスイッチを利用したいです。</div>
+                    <div class="phrase-zh">我想使用環球影城的「輪流乘坐 (Child Switch)」服務。 (Chairudo suitchi o riyo shitaidesu)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">写真を撮っていただけますか？</div>
+                    <div class="phrase-zh">可以幫我們拍張照嗎？ (Shashin o to tte itadakemasu ka?)</div>
+                </div>
+            </div>
+
+            <!-- 情境 3：緊急 -->
             <div class="card">
                 <h2 class="list-title">🚨 緊急狀況與求助</h2>
                 <div class="phrase-item">
@@ -432,6 +414,8 @@
             </div>
 
         </div>
+
+    </div>
 
     <script src="script.js"></script>
 </body>

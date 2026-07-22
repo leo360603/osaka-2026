@@ -25,7 +25,10 @@ function switchTab(tabId, event) {
     buttons.forEach(btn => btn.classList.remove('active'));
 
     // 顯示目標頁籤與啟用對應按鈕
-    document.getElementById(tabId).classList.add('active');
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+    }
     
     if (event && event.currentTarget) {
         event.currentTarget.classList.add('active');
@@ -35,7 +38,7 @@ function switchTab(tabId, event) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-//**
+/**
  * 匯率與免稅計算 (日幣 JPY -> 台幣 TWD)
  */
 function convertCurrency() {
@@ -52,13 +55,14 @@ function convertCurrency() {
     const twdValue = Math.round(jpyValue * exchangeRate);
     twdResult.value = `$ ${twdValue.toLocaleString()} TWD`;
 
-    // 免稅 (去除10%消費稅後的價格算台幣)
+    // 免稅 (去除 10% 消費稅後的價格算台幣)
     if (twdTaxFreeResult) {
         const taxFreeJpy = jpyValue / 1.1;
         const taxFreeTwd = Math.round(taxFreeJpy * exchangeRate);
         twdTaxFreeResult.value = `$ ${taxFreeTwd.toLocaleString()} TWD`;
     }
 }
+
 /**
  * 初始化檢查清單互動與本地儲存
  */
