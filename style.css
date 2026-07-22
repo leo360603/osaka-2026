@@ -1,20 +1,22 @@
-/* ==========================================
-   全局變數與基礎設定
-   ========================================== */
 :root {
-    --primary: #e65100;
-    --primary-dark: #bf360c;
-    --bg: #fbe9e7;
+    --primary: #1e88e5;
+    --bg: #f4f6f9;
     --card-bg: #ffffff;
-    --text-main: #212121;
-    --text-sub: #616161;
-    --tag-blue: #e3f2fd;
-    --tag-blue-text: #1565c0;
-    --tag-green: #e8f5e9;
-    --tag-green-text: #2e7d32;
-    --tag-orange: #fff3e0;
-    --tag-orange-text: #e65100;
-    --border-color: #e0e0e0;
+    --text-main: #2b3a4a;
+    --text-sub: #667085;
+    
+    /* 膠囊標籤配色 */
+    --pill-blue-bg: #e8f1ff;
+    --pill-blue-text: #2563eb;
+    
+    --pill-soft-blue-bg: #e0f2fe;
+    --pill-soft-blue-text: #0284c7;
+
+    --pill-green-bg: #e6f4ea;
+    --pill-green-text: #137333;
+
+    --map-btn-bg: #e6f4ea;
+    --map-btn-text: #137333;
 }
 
 body {
@@ -26,62 +28,52 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ==========================================
-   頁首與頁籤 (Sticky Navigation)
-   ========================================== */
 .sticky-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .header {
-    background-color: var(--primary);
-    color: white;
+    background-color: #ffffff;
+    color: var(--text-main);
     padding: 15px;
     text-align: center;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 1.35rem;
-    letter-spacing: 0.5px;
+    font-size: 1.25rem;
+    color: #1e293b;
 }
 
 .header p {
     margin: 4px 0 0 0;
     font-size: 0.8rem;
-    opacity: 0.9;
+    color: var(--text-sub);
 }
 
 .tab-bar {
     display: flex;
     background-color: #ffffff;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #e5e7eb;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-}
-
-.tab-bar::-webkit-scrollbar {
-    display: none;
 }
 
 .tab-btn {
-    flex: 0 0 auto;
-    padding: 12px 16px;
+    flex: 1;
+    padding: 12px 10px;
     text-align: center;
     background: none;
     border: none;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: bold;
     color: var(--text-sub);
     cursor: pointer;
-    outline: none;
-    transition: all 0.2s ease;
-    border-bottom: 3px solid transparent;
     white-space: nowrap;
+    border-bottom: 3px solid transparent;
 }
 
 .tab-btn.active {
@@ -89,11 +81,8 @@ body {
     border-bottom: 3px solid var(--primary);
 }
 
-/* ==========================================
-   主要容器與卡片樣式
-   ========================================== */
 .container {
-    padding: 15px;
+    padding: 16px;
     max-width: 600px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -107,147 +96,119 @@ body {
     display: block;
 }
 
+/* ===== 卡片核心視覺 (比照截圖) ===== */
 .card {
     background: var(--card-bg);
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f0f0f0;
 }
 
-/* ==========================================
-   行程標籤與標題
-   ========================================== */
-.day-tag {
-    background-color: var(--tag-orange);
-    color: var(--tag-orange-text);
-    padding: 5px 12px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 700;
+/* 圓角膠囊標籤 */
+.pill-tag {
     display: inline-block;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 700;
     margin-bottom: 12px;
 }
 
-.day-title, .list-title {
-    margin: 0 0 16px 0;
-    font-size: 1.25rem;
-    color: var(--primary-dark);
-    font-weight: 700;
+.pill-blue {
+    background-color: var(--pill-blue-bg);
+    color: var(--pill-blue-text);
+}
+
+.pill-soft-blue {
+    background-color: var(--pill-soft-blue-bg);
+    color: var(--pill-soft-blue-text);
+}
+
+.pill-green {
+    background-color: var(--pill-green-bg);
+    color: var(--pill-green-text);
+}
+
+/* 標題樣式 */
+.day-title {
+    margin: 0 0 14px 0;
+    font-size: 1.3rem;
+    color: #0f172a;
+    font-weight: 800;
     line-height: 1.4;
 }
 
-.section {
-    margin-bottom: 16px;
+/* Google 地圖按鈕 */
+.map-btn {
+    display: inline-block;
+    background-color: var(--map-btn-bg);
+    color: var(--map-btn-text);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 18px;
 }
 
-.section:last-child {
-    margin-bottom: 0;
+.section {
+    margin: 12px 0;
 }
 
 .section-title {
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--text-main);
-    margin: 0 0 6px 0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    color: #334155;
+    margin-bottom: 8px;
 }
 
 .section-content {
-    font-size: 0.92rem;
-    color: var(--text-sub);
-    margin: 0;
-    padding-left: 4px;
+    font-size: 0.95rem;
+    color: #475569;
     line-height: 1.6;
 }
 
-.badge {
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    display: inline-block;
-    margin-left: 6px;
+/* 細線分隔號 */
+.divider {
+    height: 1px;
+    background-color: #f1f5f9;
+    margin: 16px 0;
 }
 
-.badge-car { background-color: var(--tag-blue); color: var(--tag-blue-text); }
-.badge-transit { background-color: var(--tag-green); color: var(--tag-green-text); }
+/* 清單與工具 */
+.list-title {
+    font-size: 1.1rem;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
 
-/* ==========================================
-   清單勾選區域
-   ========================================== */
 .checklist-item {
     display: flex;
     align-items: center;
-    padding: 12px 4px;
-    border-bottom: 1px solid #f1f3f4;
-    cursor: pointer;
-    font-size: 0.98rem;
-    user-select: none;
-}
-
-.checklist-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-right: 12px;
-    cursor: pointer;
-    accent-color: var(--primary);
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f4;
 }
 
 .checklist-item.checked {
-    color: #aeaeae;
+    color: #94a3b8;
     text-decoration: line-through;
 }
 
-/* ==========================================
-   工具與常用語區域
-   ========================================== */
 .tool-row {
     display: flex;
     gap: 10px;
-    margin-bottom: 14px;
 }
 
 .tool-field {
     flex: 1;
 }
 
-.tool-field label {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-sub);
-    margin-bottom: 4px;
-}
-
 .tool-field input {
     width: 100%;
-    box-sizing: border-box;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #dadce0;
-    font-size: 0.95rem;
-}
-
-.phrase-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #f1f3f4;
-}
-
-.phrase-item:last-child {
-    border-bottom: none;
-}
-
-.phrase-jp {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--primary-dark);
-}
-
-.phrase-zh {
-    font-size: 0.88rem;
-    color: var(--text-main);
-    margin-top: 2px;
+    border: 1px solid #cbd5e1;
+    box-sizing: border-box;
 }
