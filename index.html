@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關西親子隨身助手｜大阪・京都・淡路島 7日遊</title>
+    <style>
+        :root {
+            --primary: #e65100;
+            --primary-dark: #bf360c;
+            --bg: #fbe9e7;
+            --card-bg: #ffffff;
+            --text-main: #212121;
+            --text-sub: #616161;
+            --tag-blue: #e3f2fd;
+            --tag-blue-text: #1565c0;
+            --tag-green: #e8f5e9;
+            --tag-green-text: #2e7d32;
+            --tag-orange: #fff3e0;
+            --tag-orange-text: #e65100;
+            --tag-red: #ffebee;
+            --tag-red-text: #c62828;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.35rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            margin: 4px 0 0 0;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .tab-bar {
+            display: flex;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tab-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 0 0 auto;
+            padding: 12px 14px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 0.88rem;
+            font-weight: bold;
+            color: var(--text-sub);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e0e0e0;
+        }
+
+        .day-tag {
+            background-color: var(--tag-orange);
+            color: var(--tag-orange-text);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .day-title, .list-title {
+            margin: 0 0 16px 0;
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .section {
+            margin-bottom: 16px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-content {
+            font-size: 0.92rem;
+            color: var(--text-sub);
+            margin: 0;
+            padding-left: 4px;
+            line-height: 1.6;
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-car { background-color: var(--tag-blue); color: var(--tag-blue-text); }
+        .badge-transit { background-color: var(--tag-green); color: var(--tag-green-text); }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 4px;
+            border-bottom: 1px solid #f1f3f4;
+            cursor: pointer;
+            font-size: 0.98rem;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checklist-item.checked {
+            color: #aeaeae;
+            text-decoration: line-through;
+        }
+
+        .tool-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .tool-field {
+            flex: 1;
+        }
+
+        .tool-field input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #dadce0;
+            font-size: 0.95rem;
+        }
+
+        .phrase-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .phrase-jp {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .phrase-zh {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sticky-header">
+        <div class="header">
+            <h1>🌐 關西親子隨身助手</h1>
+            <p>📅 2026/09/03 - 09/09 ｜ 5大2幼 (大阪・京都・淡路島)</p>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('itinerary')">📅 7日行程</button>
+            <button class="tab-btn" onclick="switchTab('checklist')">✅ 準備清單</button>
+            <button class="tab-btn" onclick="switchTab('tools')">🧰 實用工具</button>
+            <button class="tab-btn" onclick="switchTab('japanese')">🗣️ 實用日語</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ===== 頁籤 1：每日行程 ===== -->
+        <div id="itinerary" class="tab-content active">
+
+            <!-- Day 1 -->
+            <div class="card">
+                <span class="day-tag">DAY 1 ｜ 09/03 (四)</span>
+                <span class="badge badge-car">🚗 自駕起點</span>
+                <h2 class="day-title">抵達關西 KIX ➔ 取車 ➔ 入住「和居 春分」</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * 關西國際機場（KIX）辦理入境手續與租車手續。<br>
+                        * 駕駛租車前往大阪，辦理「和居 春分」入住手續。<br>
+                        * 傍晚周邊散步、適應環境並採買家庭補給品。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="card">
+                <span class="day-tag">DAY 2 ｜ 09/04 (五)</span>
+                <span class="badge badge-car">🚗 自駕一日遊</span>
+                <h2 class="day-title">京都古都風情 ➔ 岡崎神社 ➔ 傳統木業商會/祇園散策</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * 開車前往京都，首站前往求子/安產與可愛兔子造型聞名的 **岡崎神社**。<br>
+                        * 探訪京都在地木造建築/木材產業景點與特色市集。<br>
+                        * 傍晚走訪祇園/清水寺週邊，感受古都夜景後返大阪。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="card">
+                <span class="day-tag">DAY 3 ｜ 09/05 (六)</span>
+                <span class="badge badge-car">🚗 自駕 ➔ 傍晚還車</span>
+                <h2 class="day-title">淡路島親子體驗 ➔ 明石海峽大橋 ➔ 還車</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * 跨越明石海峽大橋前往淡路島（二次元之森 / 蠟筆小新主題公園等親子景點）。<br>
+                        * 享受淡路島在地景觀與自然美景。<br>
+                        * 傍晚返回大阪市區完成歸還車輛，準備切換為大眾運輸。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="card">
+                <span class="day-tag">DAY 4 ｜ 09/06 (日)</span>
+                <span class="badge badge-transit">🚃 大眾運輸</span>
+                <h2 class="day-title">Kids Plaza Osaka 兒童樂園 ➔ 梅田商圈 ➔ 日本橋</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * **Kids Plaza Osaka (大阪兒童樂園)**：幼兒室內體驗與互動設施放電。<br>
+                        * 逛梅田商圈（Umeda）與日本橋（Nihonbashi）周邊，安排購物與特色探訪。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="card">
+                <span class="day-tag">DAY 5 ｜ 09/07 (一)</span>
+                <span class="badge badge-transit">🚃 大眾運輸</span>
+                <h2 class="day-title">日本環球影城 (USJ) 全日夢幻體驗</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * 全天遊玩日本環球影城，特別安排適合 5 歲與 2 歲幼兒的環球奇境（Universal Wonderland）與任天堂世界區域。<br>
+                        * 備妥推車與兒童隨身點心。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 6 -->
+            <div class="card">
+                <span class="day-tag">DAY 6 ｜ 09/08 (二)</span>
+                <span class="badge badge-transit">🚃 大眾運輸</span>
+                <h2 class="day-title">大阪市區深度悠閒遊 ➔ 心齋橋・道頓堀美食</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * 心齋橋、道頓堀漫步，體驗章魚燒、大阪燒等在地親子美食。<br>
+                        * 補齊藥妝與伴手禮，保持步調輕鬆彈性。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 7 -->
+            <div class="card">
+                <span class="day-tag">DAY 7 ｜ 09/09 (三)</span>
+                <span class="badge badge-transit">🚃 專車 / 鐵路</span>
+                <h2 class="day-title">飯店退房 ➔ 臨空城 Rinku Outlet ➔ 關西機場賦歸</h2>
+                <div class="section">
+                    <div class="section-title">📍 行程規劃</div>
+                    <div class="section-content">
+                        * 退房後前往 **Rinku Premium Outlets** 最終購物補貨。<br>
+                        * 前往關西國際機場（KIX）搭機返回溫馨的家。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== 頁籤 2：準備清單 ===== -->
+        <div id="checklist" class="tab-content">
+            <div class="card">
+                <h2 class="list-title">🪪 證件與自駕準備</h2>
+                <label class="checklist-item"><input type="checkbox"> 護照正本（全家 5 大 2 幼）</label>
+                <label class="checklist-item"><input type="checkbox"> 台灣駕照正本 + 日文譯本（自駕司機必帶）</label>
+                <label class="checklist-item"><input type="checkbox"> Visit Japan Web (VJC) 入境手續 QR Code</label>
+                <label class="checklist-item"><input type="checkbox"> 租車預約確認單 / 住宿確認單</label>
+            </div>
+
+            <div class="card">
+                <h2 class="list-title">👶 兒童專屬裝備 (5歲 & 2歲)</h2>
+                <label class="checklist-item"><input type="checkbox"> 雙嬰兒推車 / 輕便推車（USJ 及出遊必備）</label>
+                <label class="checklist-item"><input type="checkbox"> 尿布、濕紙巾、防蚊液、兒童防曬乳</label>
+                <label class="checklist-item"><input type="checkbox"> 替換衣物（每日至少多備 1-2 套）</label>
+                <label class="checklist-item"><input type="checkbox"> 兒童餐具、水壺、備用奶粉/點心</label>
+                <label class="checklist-item"><input type="checkbox"> 兒童常用備用藥品（退燒藥、止瀉藥等）</label>
+            </div>
+
+            <div class="card">
+                <h2 class="list-title">🔌 電子設備與其他</h2>
+                <label class="checklist-item"><input type="checkbox"> 日本上網 SIM 卡 / eSIM / WiFi 分享器</label>
+                <label class="checklist-item"><input type="checkbox"> 行動電源與充電線</label>
+                <label class="checklist-item"><input type="checkbox"> 日幣現金與信用卡（建議多備一張備用卡）</label>
+            </div>
+        </div>
+
+        <!-- ===== 頁籤 3：實用工具 ===== -->
+        <div id="tools" class="tab-content">
+            <div class="card">
+                <h2 class="list-title">💴 匯率換算 (日幣 JPY ➔ 台幣 TWD)</h2>
+                <div class="tool-row">
+                    <div class="tool-field">
+                        <label>日幣 (JPY)</label>
+                        <input type="number" id="jpyInput" value="1000" oninput="convertCurrency()">
+                    </div>
+                    <div class="tool-field">
+                        <label>約合台幣 (TWD)</label>
+                        <input type="text" id="twdResult" readonly>
+                    </div>
+                </div>
+                <div style="font-size:0.8rem; color:var(--text-sub);">預設匯率 1 JPY = 0.21 TWD</div>
+            </div>
+
+            <div class="card">
+                <h2 class="list-title">🏠 住宿資訊</h2>
+                <p><strong>民宿名稱：</strong>和居 春分</p>
+                <p><strong>入住時間：</strong>2026/09/03 - 2026/09/09</p>
+            </div>
+
+            <div class="card">
+                <h2 class="list-title">🚨 緊急聯絡</h2>
+                <p><strong>日本警察：</strong>110</p>
+                <p><strong>救護車/消防：</strong>119</p>
+                <p><strong>台北駐大阪經濟文化辦事處：</strong>+81-6-6227-8623</p>
+            </div>
+        </div>
+
+        <!-- ===== 頁籤 4：實用日語 ===== -->
+        <div id="japanese" class="tab-content">
+            <div class="card">
+                <h2 class="list-title">🍽️ 親子用餐與點餐常用語</h2>
+                <div class="phrase-item">
+                    <div class="phrase-jp">子供用の椅子はありますか？</div>
+                    <div class="phrase-zh">請問有兒童座椅嗎？ (Kodomo yo no ishi wa arimasu ka?)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">お会計をお願いします。</div>
+                    <div class="phrase-zh">請幫我結帳。 (Okaikei o onegaishimasu)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">お水をもらえますか？</div>
+                    <div class="phrase-zh">可以給我開水嗎？ (Omizu o moraemasu ka?)</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="phrase-jp">トイレはどこですか？</div>
+                    <div class="phrase-zh">請問廁所在哪裡？ (Toilet wa doko desu ka?)</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function convertCurrency() {
+            const jpy = document.getElementById('jpyInput').value;
+            const rate = 0.21;
+            const twd = (jpy * rate).toFixed(0);
+            document.getElementById('twdResult').value = '$' + twd + ' TWD';
+        }
+
+        // 初始化換算
+        convertCurrency();
+    </script>
+</body>
+</html>
