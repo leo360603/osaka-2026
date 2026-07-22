@@ -35,22 +35,30 @@ function switchTab(tabId, event) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/**
- * 匯率即時計算 (日幣 JPY -> 台幣 TWD)
+//**
+ * 匯率與免稅計算 (日幣 JPY -> 台幣 TWD)
  */
 function convertCurrency() {
     const jpyInput = document.getElementById('jpyInput');
     const twdResult = document.getElementById('twdResult');
+    const twdTaxFreeResult = document.getElementById('twdTaxFreeResult');
     
     if (!jpyInput || !twdResult) return;
 
     const jpyValue = parseFloat(jpyInput.value) || 0;
     const exchangeRate = 0.21; // 預設參考匯率
+
+    // 原價台幣
     const twdValue = Math.round(jpyValue * exchangeRate);
-
     twdResult.value = `$ ${twdValue.toLocaleString()} TWD`;
-}
 
+    // 免稅 (去除10%消費稅後的價格算台幣)
+    if (twdTaxFreeResult) {
+        const taxFreeJpy = jpyValue / 1.1;
+        const taxFreeTwd = Math.round(taxFreeJpy * exchangeRate);
+        twdTaxFreeResult.value = `$ ${taxFreeTwd.toLocaleString()} TWD`;
+    }
+}
 /**
  * 初始化檢查清單互動與本地儲存
  */

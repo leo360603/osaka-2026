@@ -342,22 +342,77 @@
                 </div>
             </div>
 
-            <!-- 情境 3：自駕、購物與免稅 -->
+           <!-- ===== 頁籤 3：隨身速查工具箱 ===== -->
+        <div id="tools" class="tab-content">
+            
+            <!-- 1. 重要行程資訊卡 (隨時查閱) -->
             <div class="card">
-                <h2 class="list-title">🚗 自駕、購物與免稅</h2>
-                <div class="phrase-item">
-                    <div class="phrase-jp">免税手続きをお願いします。</div>
-                    <div class="phrase-zh">請幫我辦理退稅。 (Menzei tetsuzuki o onegaishimasu)</div>
+                <h2 class="list-title">🏨 住宿與交通重要資訊</h2>
+                <div class="section">
+                    <div class="section-title">📍 大阪民宿：和居 春分</div>
+                    <div class="section-content">
+                        ・地址：大阪府大阪市（請在此填入具體地址）<br>
+                        ・電話：+81-XX-XXXX-XXXX<br>
+                        ・入住/退房時間：15:00 入住 / 11:00 退房
+                    </div>
                 </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">レギュラー・満タンでお願いします。</div>
-                    <div class="phrase-zh">自駕加油：95無鉛（Regular）加滿，謝謝。 (Regyura mantan de onegaishimasu)</div>
-                </div>
-                <div class="phrase-item">
-                    <div class="phrase-jp">近くに駐車場はありますか？</div>
-                    <div class="phrase-zh">請問這附近有停車場嗎？ (Chikaku ni chushajo wa arimasu ka?)</div>
+                <div class="divider"></div>
+                <div class="section">
+                    <div class="section-title">🚗 自駕租車資訊</div>
+                    <div class="section-content">
+                        ・取車地點：關西機場取車<br>
+                        ・預約番號：(在此填入租車編號)<br>
+                        ・緊急道路救援電話：請見租車合約書
+                    </div>
                 </div>
             </div>
+
+            <!-- 2. 日本消費退稅與匯率計算機 -->
+            <div class="card">
+                <h2 class="list-title">💴 購物退稅與匯率計算</h2>
+                <div class="tool-row">
+                    <div class="tool-field">
+                        <label>標價日幣 (JPY)</label>
+                        <input type="number" id="jpyInput" value="5000" oninput="convertCurrency()">
+                    </div>
+                    <div class="tool-field">
+                        <label>約合台幣 (TWD)</label>
+                        <input type="text" id="twdResult" readonly>
+                    </div>
+                </div>
+                <div class="tool-row" style="margin-top: 10px;">
+                    <div class="tool-field">
+                        <label>免稅10%後約合 (TWD)</label>
+                        <input type="text" id="twdTaxFreeResult" readonly style="background-color: #e8f5e9; font-weight: bold; color: #2e7d32;">
+                    </div>
+                </div>
+                <div style="font-size:0.8rem; color:var(--text-sub); margin-top:6px;">* 預設參考匯率 0.21，滿 5,000 日圓可享免稅 10%</div>
+            </div>
+
+            <!-- 3. 日本童裝與鞋號尺寸對照表 -->
+            <div class="card">
+                <h2 class="list-title">👟 童裝/童鞋尺寸速查 (5歲 & 2歲)</h2>
+                <div class="section-content">
+                    <strong>👕 童裝尺寸估算：</strong><br>
+                    ・2 歲（約 85-95 cm）：建議挑選 **90 ~ 100 碼**<br>
+                    ・5 歲（約 105-115 cm）：建議挑選 **110 ~ 120 碼**<br><br>
+                    <strong>👟 童鞋 cm 對照：</strong><br>
+                    ・日本童鞋皆以 **公分 (cm)** 標示，建議現場量腳長後再多加 0.5~1 cm 預留長大空間。
+                </div>
+            </div>
+
+            <!-- 4. 緊急連絡電話（一鍵撥打） -->
+            <div class="card">
+                <h2 class="list-title">🚨 緊急聯絡與求助電話</h2>
+                <div class="section" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="tel:119" class="map-btn" style="background-color: #fee2e2; color: #dc2626; margin: 0;">🚑 119 (救護車/消防)</a>
+                    <a href="tel:110" class="map-btn" style="background-color: #e0e7ff; color: #3730a3; margin: 0;">👮 110 (警察局)</a>
+                    <a href="tel:+81-6-6227-8623" class="map-btn" style="background-color: #fef3c7; color: #92400e; margin: 0;">🇹🇼 大阪辦事處</a>
+                </div>
+                <div style="font-size:0.8rem; color:var(--text-sub); margin-top:8px;">* 台北駐大阪經濟文化辦事處緊急聯絡電話：+81-6-6227-8623</div>
+            </div>
+
+        </div>
 
             <!-- 情境 4：緊急狀況與求助 -->
             <div class="card">
